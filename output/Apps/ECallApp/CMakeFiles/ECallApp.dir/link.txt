@@ -1,0 +1,2 @@
+/usr/bin/ar qc libECallApp.a CMakeFiles/ECallApp.dir/src/HMIAdapter.cpp.o CMakeFiles/ECallApp.dir/src/AudioAdapter.cpp.o CMakeFiles/ECallApp.dir/src/MQTTAdapter.cpp.o CMakeFiles/ECallApp.dir/ECallApp.cpp.o
+/usr/bin/ranlib libECallApp.a

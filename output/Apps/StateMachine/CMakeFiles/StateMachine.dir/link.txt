@@ -1,0 +1,2 @@
+/usr/bin/ar qc libStateMachine.a CMakeFiles/StateMachine.dir/src/CancelTimerState.cpp.o CMakeFiles/StateMachine.dir/src/CenterState.cpp.o CMakeFiles/StateMachine.dir/src/EventTable.cpp.o CMakeFiles/StateMachine.dir/src/IDLEState.cpp.o
+/usr/bin/ranlib libStateMachine.a

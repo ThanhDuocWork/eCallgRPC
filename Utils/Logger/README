@@ -1,0 +1,21 @@
+#// ghi vào log system
+#// new logsys save at /var/log/syslog
+#// old logsys save at /var/log/syslog.1
+#// note: need permission sudo or root to open file syslog
+#build TestLogger
+sudo g++ -o Example/TestLogger Example/TestLogger.cpp Src/Logger.cpp
+cd Example/
+./TestLogger
+
+#stream file log
+    cd vào /var/log
+    -> dùng lệnh: while true;do sudo cat syslog | grep eCall --binary-file=text; sleep 5; done
+# clean log
+    sudo truncate -s 0 /var/log/syslog
+# log ra stream mới nhất
+    sudo tail -f syslog | grep eCall --binary-file=text
+
+#format file log
+    => [date] + [IDMyComputer] + [[Name+ID]Process] + [logState] + [[fileName]:[funcName]:[line]] + [message]
+
+****************************************************************

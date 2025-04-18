@@ -1,0 +1,10 @@
+///////////////////////////////////////////////////////////////////////
+                    Sample: testTimer.cpp
+***********************************************************************
+S0-b: SOS Cancelation Timer	Start Canalation Timer													
+	When timer is not expired, detect SOS button long-press, if SOS button long-press is detected, play beep 9, turn off led pattern-B, go to Idle state													
+	When timer is expired, go to S1 state				
+									
+Callback Timer:
+    Callback timer is not expired: If receive a re-send data request from broker app will re-send data to broker.									
+	Callback timer is expired: If receive a re-send data request from broker app will do nothing.									

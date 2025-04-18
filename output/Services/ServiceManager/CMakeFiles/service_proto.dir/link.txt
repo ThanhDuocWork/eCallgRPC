@@ -1,0 +1,2 @@
+/usr/bin/ar qc libservice_proto.a CMakeFiles/service_proto.dir/__/__/generated/service.pb.cc.o CMakeFiles/service_proto.dir/__/__/generated/service.grpc.pb.cc.o
+/usr/bin/ranlib libservice_proto.a

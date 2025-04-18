@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.10)
+project(Services)
+add_definitions("-Wl,--copy-dt-needed-entries")
+add_subdirectory(ServiceManager)
+add_subdirectory(HMISrv)
+add_subdirectory(AudioSrv)
+add_subdirectory(MQTTSrv)

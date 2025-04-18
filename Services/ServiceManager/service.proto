@@ -1,0 +1,152 @@
+syntax = "proto3";
+
+package service;
+// HMIAdapter
+
+service AudioAdapter{
+    //AudioAdapter send request data to AudioSrv
+    rpc requestPlayAudioAdapter(AudioDataRequest) returns (AudioDataResponse);   
+    rpc requestStopAudioAdapter(AudioDataRequest) returns (AudioDataResponse); 
+}
+
+// HMIAdapter
+
+service HMIAdapter{
+    //HMIADapter receive data from HMISrv
+    rpc requestButtonHMIAdapter(HMIDataRequest) returns (HMIDataResponse);    
+}
+
+// MQTTAdapter
+
+service MQTTAdapter{
+    //MQTTAdapter send data request CAN to MQTTSrv
+    rpc sendTriggerDataCANToMQTTSrv(MQTTDataRequest) returns (MQTTDataResponse);    
+}
+
+// ServiceManager
+service ServiceManager {
+    rpc registerHMIMgrService (RegisterHMIRequest) returns (RegisterHMIResponse);
+    rpc registerAudioMgrService (RegisterAudioRequest) returns (RegisterAudioResponse);
+    rpc registerMQTTMgrService (RegisterMQTTRequest) returns (RegisterMQTTResponse);
+}
+
+// HMI Service
+service HMISrv {
+    rpc registerHMISrv (HMIServiceRequest) returns (HMIServiceResponse);
+
+    //HMISrv send data to HMIAdapter
+    rpc requestButtonHMISrv (HMIDataRequest) returns (HMIDataResponse); 
+}
+
+// Audio Service
+service AudioSrv {
+    rpc registerAudioSrv (AudioServiceRequest) returns (AudioServiceResponse);
+    //receive data AudioAdapter
+    rpc receivePlayAudioSrv(AudioDataRequest) returns (AudioDataResponse);
+    rpc receiveStopAudioSrv(AudioDataRequest) returns (AudioDataResponse);
+}
+
+// MQTT Service
+service MQTTSrv {
+    rpc registerMQTTSrv (MQTTServiceRequest) returns (MQTTServiceResponse);
+
+    //receive data MQTTAdapter
+    rpc receiveTriggerDataCAN(MQTTDataRequest) returns (MQTTDataResponse);
+}
+
+// ==============================
+// Message Manager Definitions
+// ==============================
+
+// register HMI Service
+message RegisterHMIRequest {
+    string client_id = 1;
+}
+
+message RegisterHMIResponse {
+    bool success = 1;
+}
+
+// register Audio Service
+message RegisterAudioRequest {
+    string client_id = 1;
+}
+
+message RegisterAudioResponse {
+    bool success = 1;
+}
+
+// register MQTT Service
+message RegisterMQTTRequest {
+    string client_id = 1;
+}
+
+message RegisterMQTTResponse {
+    bool success = 1;
+}
+
+// ==============================
+// Message Services Definitions
+// ==============================
+
+// HMI Service Messages
+message HMIServiceRequest {
+    string request_data = 1;
+}
+
+message HMIServiceResponse {
+    string response_data = 1;
+}
+
+// Audio Service Messages
+message AudioServiceRequest {
+    string request_data = 1;
+}
+
+message AudioServiceResponse {
+    string response_data = 1;
+}
+
+// MQTT Service Messages
+message MQTTServiceRequest {
+    string request_data = 1;
+}
+
+message MQTTServiceResponse {
+    string response_data = 1;
+}
+
+// ==============================
+// Message Services HMISrv -> HMIAdapter
+// ==============================
+
+message HMIDataRequest {
+    string data = 1;
+}
+
+message HMIDataResponse {
+    bool success = 1;
+}
+
+// ==============================
+// Message Services MQTTAdapter -> MQTTSrv
+// ==============================
+
+message MQTTDataRequest {
+    string data = 1;
+}
+
+message MQTTDataResponse {
+    bool success = 1;
+}
+// ==============================
+// Message Services AudioAdapter -> AudioSrv
+// ==============================
+
+message AudioDataRequest {
+    string data = 1;
+}
+
+message AudioDataResponse {
+    bool success = 1;
+}
