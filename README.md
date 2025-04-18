@@ -38,15 +38,8 @@
             ` ./HMISrv `     
 
 Link refer: 
-
-[gRPC example](https://github.com/chungphb/grpc-cpp)
-[gRPC-cpp](https://grpc.io/docs/languages/cpp/) 
-
-## 3. Tool tilix
-*Note: install tilix, used to divide the terminal screen for easy*
-`sudo apt update`
-`sudo apt installl tilix`
-[Link refer](https://www.geeksforgeeks.org/how-to-install-tilix-terminal-emulator-in-ubuntu-fedora-arch-linux/)
+- [gRPC example](https://github.com/chungphb/grpc-cpp)
+- [gRPC-cpp](https://grpc.io/docs/languages/cpp/) 
 
 ## 4. Prepare IPC gRPC
 ### 4.1. Clone repo gRPC, ussing command:
@@ -70,11 +63,11 @@ Link refer:
         ` ls ~/grpc/cmake/build/lib `
 ### 4.4. Export lib:
 - Using command:
-       ` export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH `
+        ` export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH `
         ` sudo ldconfig `
-    - check export: 	
+    - Check export: 	
         ` pkg-config --modversion grpc `
-        `export PKG_CONFIG_PATH=/usr/local/lib/libs/opt/pkgconfig:$PKG_CONFIG_PATH `
+        ` export PKG_CONFIG_PATH=/usr/local/lib/libs/opt/pkgconfig:$PKG_CONFIG_PATH `
         ` echo 'export PKG_CONFIG_PATH=/usr/local/lib/libs/opt/pkgconfig:$PKG_CONFIG_PATH' >> ~/.bashrc `
         ` source ~/.bashrc `
 ### 4.5. Copy lib to lib system
@@ -84,5 +77,10 @@ Link refer:
     ` sudo ldconfig `
     ` echo "/usr/local/lib" | sudo tee -a /etc/ld.so.conf.d/grpc.conf `
     ` sudo ldconfig `
-     
+
+## 5. Tool tilix
+*Note: install tilix, used to divide the terminal screen for easy*
+`sudo apt update`
+`sudo apt installl tilix`
+[Link refer](https://www.geeksforgeeks.org/how-to-install-tilix-terminal-emulator-in-ubuntu-fedora-arch-linux/)     
                     

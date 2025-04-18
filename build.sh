@@ -15,7 +15,7 @@ println()
 }
 
 #=============== Main Script ===============
-PROJECT_DIR=~/eCallgRPC
+PROJECT_DIR=$(pwd)
 OUTPUT_DIR="$PROJECT_DIR/output"
 N_CPU=$(nproc)
 

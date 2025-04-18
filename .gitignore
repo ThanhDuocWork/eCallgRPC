@@ -1,0 +1,5 @@
+#Project configurations
+.vscode/
+
+#Do not add output
+output/
