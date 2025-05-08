@@ -7,27 +7,21 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
 )
 
-set(HEADERS
+# create executable
+add_executable(HMISrv ${SOURCES})
+
+target_include_directories(HMISrv PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/inc
-)
-
-# 🔹 Thêm đường dẫn chứa `service.grpc.pb.h`
-include_directories(${CMAKE_SOURCE_DIR}/Services/ServiceManager/gencode)
-
-# 🔹 Thêm thư mục chứa các thư viện cần thiết
-include_directories(
+    ${CMAKE_SOURCE_DIR}/Services/ServiceManager/gencode
     ${CMAKE_SOURCE_DIR}/Utils/Parameter/inc
     ${CMAKE_SOURCE_DIR}/Utils/Logger/inc
-    ${CMAKE_SOURCE_DIR}/Utils/CANBus/inc
 )
-# 🔹 Tìm thư viện Protobuf và gRPC trước khi sử dụng
+
+# find lib Protobuf and gRPC
 find_package(Protobuf REQUIRED)
 find_package(gRPC REQUIRED)
 
-# 🔹 Tạo executable cho HMISrv
-add_executable(HMISrv ${SOURCES})
-
-# 🔹 Liên kết HMISrv với service_proto và các thư viện cần thiết
+# linking lib 
 target_link_libraries(HMISrv
     Utils
     service_proto  # Sử dụng thư viện đã tạo từ ServiceManager

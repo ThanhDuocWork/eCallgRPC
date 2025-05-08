@@ -105,6 +105,7 @@ void AudioAdapter::registerService ()
     }
     else
     {
+        
         printLog_I ("Failed to register!!!" + status.error_message ());
     }
 }

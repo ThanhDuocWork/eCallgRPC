@@ -17,6 +17,15 @@ namespace MESSAGE_EVENT
     };
 
 }
+namespace MESSAGE
+{
+    enum class INTERNAL_MESSAGE : uint32_t
+    {
+        AUDIO_gRPC_DIE,
+        HMI_gRPC_DIE,
+        MQTT_gRPC_DIE
+    }; 
+}
 namespace gRPC_Service
 {
     constexpr const char* gRPC_HMI_SERVICE_NAME = "HMIMgrSrv";

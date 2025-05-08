@@ -12,9 +12,13 @@ class EventData
         int mMessageID;
     public:
         EventData() = default;
-        EventData(uint32_t messgaID);
+        EventData(uint32_t messageID);
+        // EventData(uint32_t messageID):mMessageID(messageID)
+        // {
+
+        // }
         virtual ~EventData();
-        int getMessageID();
+        int getMessageID() const;
         static EventData *getInstanceEventData();
 };
 #endif

@@ -16,9 +16,9 @@ class EventTable
 {
     private:
     std::map<MESSAGE_EVENT::ENUM_ESTATE_MESSAGE, std::function<void (std::shared_ptr<EventData>)>> stateHandlers;
-
+    // std::map<MESSAGE::INTERNAL_MESSAGE, std::function<void(std::)
     // std::map<MESSAGE_EVENT::ENUM_MESSAGE_RESPONSE, std::function<void (std::shared_ptr<EventData>)>> messageMap;
-    static std::unique_ptr<EventTable> mInstatnceTableEvent;
+    static std::shared_ptr<EventTable> mInstatnceTableEvent;
 
     public:
     EventTable ();

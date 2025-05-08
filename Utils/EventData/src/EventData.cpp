@@ -8,7 +8,7 @@ EventData::~EventData()
 {
 
 }
-int EventData::getMessageID()
+int EventData::getMessageID() const
 {
     return mMessageID;
 }

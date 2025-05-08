@@ -3,17 +3,14 @@ project(eCallver2)
 add_definitions("-Wl,--copy-dt-needed-entries")
 set(CMAKE_CXX_STANDARD 17)
 
-# Thêm thư mục tìm kiếm cho header files
-include_directories(${PROJECT_SOURCE_DIR}/Apps/ECallApp/inc)
-include_directories(${PROJECT_SOURCE_DIR}/Apps/StateMachine/inc)
-include_directories(${PROJECT_SOURCE_DIR}/Services/HMISrv/inc)
-include_directories(${PROJECT_SOURCE_DIR}/Services/AudioSrv/inc)
-include_directories(${PROJECT_SOURCE_DIR}/Services/MQTTSrv/inc)
-include_directories(${PROJECT_SOURCE_DIR}/Utils)
+add_library(project_dependencies INTERFACE)
+target_link_libraries(project_dependencies INTERFACE
+    protobuf::libprotobuf
+    gRPC::grpc++
+    pthread
+)
 
-# Thêm các subdirectory để build riêng từng phần
+# Thêm các subdirectory
 add_subdirectory(Utils)
 add_subdirectory(Services)
 add_subdirectory(Apps)
-
-

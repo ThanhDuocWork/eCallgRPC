@@ -1,6 +1,6 @@
 #include "EventTable.h"
 
-std::unique_ptr<EventTable> EventTable::mInstatnceTableEvent = nullptr;
+std::shared_ptr<EventTable> EventTable::mInstatnceTableEvent = nullptr;
 EventTable::EventTable ()
 {
     initializeHandlers ();
@@ -29,6 +29,7 @@ void EventTable::eventStateFunction (std::shared_ptr<EventData> event)
         if (stateHandlers.find (messageID) != stateHandlers.end ())
         {
             stateHandlers[messageID](event);
+            printLog_I("MessageID check state: %d",messageID);
         }
     }
 }
@@ -40,7 +41,7 @@ EventTable *EventTable::getInstance ()
 {
     if (mInstatnceTableEvent == nullptr)
     {
-        mInstatnceTableEvent = std::make_unique<EventTable> ();
+        mInstatnceTableEvent = std::make_shared<EventTable> ();
     }
     return mInstatnceTableEvent.get ();
 }

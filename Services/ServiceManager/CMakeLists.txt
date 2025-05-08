@@ -4,7 +4,7 @@ add_definitions(-Wl,--copy-dt-needed-entries)
 set(CMAKE_CXX_STANDARD 14)
 
 # ================================
-# Thêm các thư viện cần thiết
+# Add the necessary libraries
 # ================================
 find_package(Threads REQUIRED)
 find_package(Protobuf CONFIG REQUIRED)
@@ -27,19 +27,18 @@ endif()
 # ================================
 # Xử lý ProtoBuf & gRPC
 # ================================
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/inc)
 
-# Định nghĩa thư mục chứa file .proto
+# define dir contain file .proto
 set(PROTO_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(GENERATED_PROTO_DIR ${CMAKE_BINARY_DIR}/generated)
 
-# Đảm bảo thư mục output tồn tại
+# Make sure the output directory exists
 file(MAKE_DIRECTORY ${GENERATED_PROTO_DIR})
 
-# Định nghĩa các file .proto
+# define file .proto
 set(PROTO_FILES ${PROTO_SRC_DIR}/service.proto)
 
-# Tạo file .pb.cc và .grpc.pb.cc
+# create file .pb.cc và .grpc.pb.cc
 add_custom_command(
     OUTPUT ${GENERATED_PROTO_DIR}/service.pb.cc
            ${GENERATED_PROTO_DIR}/service.grpc.pb.cc
@@ -52,7 +51,7 @@ add_custom_command(
     DEPENDS ${PROTO_FILES}
 )
 
-# Tạo thư viện service_proto
+# create lib service_proto
 add_library(service_proto STATIC
     ${GENERATED_PROTO_DIR}/service.pb.cc
     ${GENERATED_PROTO_DIR}/service.grpc.pb.cc
@@ -62,22 +61,21 @@ target_include_directories(service_proto PUBLIC ${GENERATED_PROTO_DIR})
 target_link_libraries(service_proto ${_GRPC_GRPCPP} ${_PROTOBUF_LIBPROTOBUF})
 target_include_directories(service_proto PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/inc)
 
-# ================================
-# `Utils`
-include_directories(
-    ${CMAKE_SOURCE_DIR}/Utils/Parameter/inc
-    ${CMAKE_SOURCE_DIR}/Utils/Logger/inc
-)
-include_directories(
-    ${CMAKE_SOURCE_DIR}/Apps/ECallApp/inc
-)
-# ================================
-# Tạo executable cho ServiceManager
+# create executable for ServiceManager
 # ================================
 add_executable(ServiceManager src/ServiceManager.cpp)
 
-# Link thư viện `service_proto` và `Threads`
-target_link_libraries(ServiceManager
+# ================================
+# lib necessary PUBLIC
+target_include_directories(ServiceManager PUBLIC
+    ${CMAKE_SOURCE_DIR}/Apps/ECallApp/inc
+    ${CMAKE_SOURCE_DIR}/Utils/Parameter/inc
+    ${CMAKE_SOURCE_DIR}/Utils/Logger/inc
+)
+# ================================
+
+# Link lib `service_proto` và `Threads`
+target_link_libraries(ServiceManager PUBLIC
     ECallApp
     Utils
     service_proto

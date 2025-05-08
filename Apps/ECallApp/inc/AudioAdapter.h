@@ -7,6 +7,8 @@
 #include<queue>
 #include<thread>
 #include<condition_variable>
+#include"EventData.h"
+#include"ManagerMessage.h"
 /*===================================
 //Audio gRPC
 ===================================*/

@@ -8,29 +8,21 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
 )
 
-set(HEADERS
-    ${CMAKE_CURRENT_SOURCE_DIR}/inc/HMQTTSrv.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/inc/MQTTFunc.h
-)
+# create executable
+add_executable(MQTTSrv ${SOURCES})
 
-# 🔹 Thêm đường dẫn chứa `service.grpc.pb.h`
-include_directories(${CMAKE_SOURCE_DIR}/Services/ServiceManager/gencode)
-
-# 🔹 Thêm thư mục chứa các thư viện cần thiết
-include_directories(
+target_include_directories(MQTTSrv PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/inc
+    ${CMAKE_SOURCE_DIR}/Services/ServiceManager/gencode
     ${CMAKE_SOURCE_DIR}/Utils/Parameter/inc
     ${CMAKE_SOURCE_DIR}/Utils/Logger/inc
-    ${CMAKE_SOURCE_DIR}/Utils/CANBus/inc
 )
 
-# 🔹 Tìm thư viện Protobuf và gRPC trước khi sử dụng
+# find lib Protobuf and gRPC
 find_package(Protobuf REQUIRED)
 find_package(gRPC REQUIRED)
 
-# 🔹 Tạo executable cho MQTT
-add_executable(MQTTSrv ${SOURCES})
-
-# 🔹 Liên kết MQTTSrv với service_proto và các thư viện cần thiết
+# linking lib 
 target_link_libraries(MQTTSrv
     service_proto  # Sử dụng thư viện đã tạo từ ServiceManager
     mosquitto

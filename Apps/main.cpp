@@ -7,9 +7,11 @@
 #include "IState.h"
 #include "ManagerMessage.h"
 #include "Logger.h"
-
+#include "EventData.h"
 int main()
 {
+    printLog_I("check data: %d",EventData::getInstanceEventData()->getMessageID());
+
     std::thread MQTTImplThread (RunMQTTAdapter);
     MQTTImplThread.detach ();
 

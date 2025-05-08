@@ -3,24 +3,26 @@ project(Apps)
 
 add_definitions(-Wl,--copy-dt-needed-entries)
 
-# Thêm đường dẫn của `Utils`
-include_directories(
-    ${CMAKE_SOURCE_DIR}/Utils/Parameter/inc 
-    ${CMAKE_SOURCE_DIR}/Utils/Logger/inc
-    ${CMAKE_SOURCE_DIR}/Utils/NlohmannJSON/inc
-)
 
-# Thêm các module con
+# module subdirectory
 add_subdirectory(ECallApp)
 add_subdirectory(StateMachine)
 
-# Thêm source chính (main.cpp)
 set(SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
 
-# Tạo executable cho MainApp
+# create executable
 add_executable(MainApp ${SOURCES})
 
-# Liên kết `MainApp` với các thư viện con
+target_include_directories(MainApp PUBLIC
+    ${CMAKE_SOURCE_DIR}/Apps/ECallApp/inc
+    ${CMAKE_SOURCE_DIR}/Apps/StateMachine/inc
+    ${CMAKE_SOURCE_DIR}/Utils/Parameter/inc
+    ${CMAKE_SOURCE_DIR}/Utils/Logger/inc
+    ${CMAKE_SOURCE_DIR}/Utils/NlohmannJSON/inc
+    ${CMAKE_SOURCE_DIR}/Services/ServiceManager/gencode
+)
+
+# linking lib
 target_link_libraries(MainApp PUBLIC
     Utils
     ECallApp
@@ -28,5 +30,5 @@ target_link_libraries(MainApp PUBLIC
     pthread
 )
 
-# Đảm bảo `Utils` được build trước
+# make sure `Utils` build before
 add_dependencies(MainApp Utils)
